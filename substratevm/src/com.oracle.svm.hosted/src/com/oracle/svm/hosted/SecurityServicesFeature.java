@@ -76,8 +76,12 @@ import javax.crypto.SecretKeyFactory;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
+import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.Configuration;
+import javax.security.sasl.Sasl;
+import javax.security.sasl.SaslClient;
 import javax.security.sasl.SaslClientFactory;
+import javax.security.sasl.SaslServer;
 import javax.security.sasl.SaslServerFactory;
 import javax.smartcardio.TerminalFactory;
 import javax.xml.crypto.dsig.TransformService;
@@ -109,6 +113,7 @@ import com.oracle.svm.hosted.FeatureImpl.BeforeAnalysisAccessImpl;
 import com.oracle.svm.hosted.FeatureImpl.DuringAnalysisAccessImpl;
 import com.oracle.svm.hosted.FeatureImpl.DuringSetupAccessImpl;
 import com.oracle.svm.hosted.c.NativeLibraries;
+import com.oracle.svm.util.ClassUtil;
 import com.oracle.svm.util.ModuleSupport;
 import com.oracle.svm.util.ReflectionUtil;
 
@@ -510,6 +515,21 @@ public class SecurityServicesFeature extends JNIRegistrationUtil implements Feat
         return allKnownServices;
     }
 
+    private void registerSpecialReachabilityHandlers(BeforeAnalysisAccess access) {
+        /*
+         * Sasl does not conform to the JCA - the service has no getInstance method. We instead use
+         * the Sasl facade class for our reachability handlers.
+         */
+        try {
+            Method createSaslClient = Sasl.class.getMethod("createSaslClient", String[].class, String.class, String.class, String.class, Map.class, CallbackHandler.class);
+            access.registerReachabilityHandler(a -> registerServices(a, createSaslClient, SaslClient.class), createSaslClient);
+            Method createSaslServer = Sasl.class.getMethod("createSaslServer", String.class, String.class, String.class, Map.class, CallbackHandler.class);
+            access.registerReachabilityHandler(a -> registerServices(a, createSaslServer, SaslServer.class), createSaslServer);
+        } catch (NoSuchMethodException e) {
+            trace("Failed to enable automatic SASL provider registration: %s", e);
+        }
+    }
+
     private void registerServiceReachabilityHandlers(BeforeAnalysisAccess access) {
         ctrParamClassAccessor = getConstructorParameterClassAccessor(loader);
         getSpiClassMethod = getSpiClassMethod();
@@ -542,6 +562,8 @@ public class SecurityServicesFeature extends JNIRegistrationUtil implements Feat
             }
         }
 
+        registerSpecialReachabilityHandlers(access);
+
         /*
          * On Oracle JDK the SecureRandom service implementations are not automatically discovered
          * by the mechanism above because SecureRandom.getInstance() is not invoked. For example
@@ -561,12 +583,19 @@ public class SecurityServicesFeature extends JNIRegistrationUtil implements Feat
          * but not any of its sub-packages. See java.security.Security.getSpiClass().
          */
         // Checkstyle: allow Class.getSimpleName
-        String serviceType = serviceClass.getSimpleName();
+        String serviceType = getServiceType(serviceClass);
         // Checkstyle: disallow Class.getSimpleName
         if (serviceClass.getPackage().getName().equals("java.security")) {
             registerSpiClass(getSpiClassMethod, serviceType);
         }
         registerServices(access, trigger, serviceType);
+    }
+
+    private String getServiceType(Class<?> serviceClass) {
+        if (serviceClass == SaslClient.class || serviceClass == SaslServer.class) {
+            return ClassUtil.getUnqualifiedName(serviceClass) + "Factory";
+        }
+        return ClassUtil.getUnqualifiedName(serviceClass);
     }
 
     ConcurrentHashMap<String, Boolean> processedServiceClasses = new ConcurrentHashMap<>();
