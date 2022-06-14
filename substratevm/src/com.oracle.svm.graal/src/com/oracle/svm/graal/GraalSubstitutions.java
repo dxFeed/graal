@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import org.graalvm.collections.EconomicMap;
 import org.graalvm.collections.EconomicSet;
 import org.graalvm.collections.Equivalence;
@@ -137,10 +138,10 @@ final class Target_org_graalvm_compiler_debug_DebugContext_Invariants {
 
 @TargetClass(value = DebugContext.class, innerClass = "Immutable", onlyWith = GraalFeature.IsEnabled.class)
 final class Target_org_graalvm_compiler_debug_DebugContext_Immutable {
-    static class ClearImmutableCache implements RecomputeFieldValue.CustomFieldValueComputer {
+    static class ClearImmutableCache implements CustomFieldValueComputer {
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.BeforeAnalysis;
         }
 
         @Override
@@ -171,10 +172,10 @@ final class Target_org_graalvm_compiler_debug_DebugContext_Immutable {
 
 @TargetClass(value = DebugHandlersFactory.class, onlyWith = GraalFeature.IsEnabled.class)
 final class Target_org_graalvm_compiler_debug_DebugHandlersFactory {
-    static class CachedFactories implements RecomputeFieldValue.CustomFieldValueComputer {
+    static class CachedFactories implements CustomFieldValueComputer {
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.BeforeAnalysis;
         }
 
         @Override

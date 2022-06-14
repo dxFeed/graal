@@ -33,7 +33,7 @@ import org.junit.runners.model.TestClass;
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.Inject;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
-import com.oracle.svm.core.annotate.RecomputeFieldValue.CustomFieldValueComputer;
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import com.oracle.svm.core.annotate.RecomputeFieldValue.Kind;
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
@@ -46,8 +46,8 @@ public final class Target_org_junit_runners_model_TestClass {
 
     public static final class OnlyConstructorComputer implements CustomFieldValueComputer {
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.BeforeAnalysis;
         }
 
         @Override

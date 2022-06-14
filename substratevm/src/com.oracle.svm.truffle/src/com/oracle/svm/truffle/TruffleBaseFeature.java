@@ -47,6 +47,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.BooleanSupplier;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
+import com.oracle.svm.core.util.CustomFieldValueTransformer;
 import com.oracle.svm.core.heap.Pod;
 import com.oracle.svm.hosted.heap.PodSupport;
 import org.graalvm.collections.Pair;
@@ -75,7 +77,7 @@ import com.oracle.svm.core.ParsingReason;
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.AnnotateOriginal;
 import com.oracle.svm.core.annotate.Delete;
-import com.oracle.svm.core.annotate.NeverInline;
+import com.oracle.svm.core.NeverInline;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
 import com.oracle.svm.core.annotate.RecomputeFieldValue.Kind;
 import com.oracle.svm.core.annotate.Substitute;
@@ -816,7 +818,7 @@ final class Target_com_oracle_truffle_api_staticobject_StaticProperty {
     @Alias
     native void initOffset(int o);
 
-    public static final class OffsetTransformer implements RecomputeFieldValue.CustomFieldValueTransformer {
+    public static final class OffsetTransformer implements CustomFieldValueTransformer {
         /*
          * We have to use reflection to access private members instead of aliasing them in the
          * substitution class since substitutions are present only at runtime
@@ -828,8 +830,8 @@ final class Target_com_oracle_truffle_api_staticobject_StaticProperty {
         }
 
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.BeforeAnalysis;
         }
 
         @Override
@@ -890,7 +892,7 @@ final class Target_com_oracle_truffle_api_staticobject_StaticProperty {
 @TargetClass(className = "com.oracle.truffle.api.staticobject.ArrayBasedShapeGenerator", onlyWith = TruffleBaseFeature.IsEnabled.class)
 final class Target_com_oracle_truffle_api_staticobject_ArrayBasedShapeGenerator {
 
-    public static final class OffsetTransformer implements RecomputeFieldValue.CustomFieldValueTransformer {
+    public static final class OffsetTransformer implements CustomFieldValueTransformer {
         private static final Class<?> SHAPE_GENERATOR;
 
         static {
@@ -902,8 +904,8 @@ final class Target_com_oracle_truffle_api_staticobject_ArrayBasedShapeGenerator 
         }
 
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.AfterAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.AfterAnalysis;
         }
 
         @Override
@@ -1031,10 +1033,10 @@ final class Target_com_oracle_truffle_api_nodes_NodeClassImpl_NodeFieldData {
     @Alias @RecomputeFieldValue(kind = Kind.Custom, declClass = OffsetComputer.class) //
     private long offset;
 
-    private static class OffsetComputer implements RecomputeFieldValue.CustomFieldValueComputer {
+    private static class OffsetComputer implements CustomFieldValueComputer {
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.AfterAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.AfterAnalysis;
         }
 
         @Override

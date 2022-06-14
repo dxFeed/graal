@@ -25,6 +25,7 @@
  */
 package com.oracle.svm.core.jfr.logging;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import com.oracle.svm.core.jfr.HasJfrSupport;
 import org.graalvm.nativeimage.Platform;
 import org.graalvm.nativeimage.Platforms;
@@ -45,10 +46,10 @@ final class Target_jdk_jfr_internal_LogTag {
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ComputeTagSetLevel implements RecomputeFieldValue.CustomFieldValueComputer {
+class ComputeTagSetLevel implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override

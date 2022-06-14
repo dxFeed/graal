@@ -24,6 +24,7 @@
  */
 package com.oracle.svm.core.graal.nodes;
 
+import com.oracle.svm.core.hub.Hybrid;
 import org.graalvm.compiler.core.common.type.StampFactory;
 import org.graalvm.compiler.core.common.type.TypeReference;
 import org.graalvm.compiler.graph.NodeClass;
@@ -37,7 +38,7 @@ import jdk.vm.ci.meta.ResolvedJavaType;
  * The {@link SubstrateNewHybridInstanceNode} represents the allocation of an instance class object
  * with a hybrid layout.
  * 
- * @see com.oracle.svm.core.annotate.Hybrid
+ * @see Hybrid
  */
 @NodeInfo(nameTemplate = "NewHybridInstance {p#instanceClass/s}")
 public final class SubstrateNewHybridInstanceNode extends AbstractNewArrayNode {

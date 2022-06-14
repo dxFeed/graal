@@ -38,7 +38,7 @@ import org.graalvm.word.WordFactory;
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
 import com.oracle.svm.core.annotate.RecomputeFieldValue.Kind;
-import com.oracle.svm.core.annotate.RecomputeFieldValue.NewEmptyArrayTransformer;
+import com.oracle.svm.core.util.NewEmptyArrayTransformer;
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
 import com.oracle.svm.truffle.nfi.NativeAPI.NativeTruffleContext;

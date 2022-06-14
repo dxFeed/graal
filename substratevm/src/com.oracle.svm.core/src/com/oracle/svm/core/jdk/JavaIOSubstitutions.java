@@ -31,6 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.oracle.svm.core.annotate.Alias;
+import com.oracle.svm.core.util.CustomFieldValueTransformer;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
 import com.oracle.svm.core.annotate.RecomputeFieldValue.Kind;
 import com.oracle.svm.core.annotate.Substitute;
@@ -81,10 +82,10 @@ final class Target_java_io_ClassCache {
 /**
  * Creates a new instance by calling the no-args constructor of the original value's class.
  */
-final class ConstructCopy implements RecomputeFieldValue.CustomFieldValueTransformer {
+final class ConstructCopy implements CustomFieldValueTransformer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override

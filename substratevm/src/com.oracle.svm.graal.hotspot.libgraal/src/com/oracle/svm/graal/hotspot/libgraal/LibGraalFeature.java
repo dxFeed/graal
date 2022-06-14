@@ -51,6 +51,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import org.graalvm.collections.EconomicMap;
 import org.graalvm.compiler.code.DisassemblerProvider;
 import org.graalvm.compiler.core.GraalServiceThread;
@@ -686,10 +687,10 @@ final class Target_org_graalvm_compiler_hotspot_HotSpotGraalRuntime {
         VMRuntime.initialize();
     }
 
-    private static final class InjectedManagementComputer implements RecomputeFieldValue.CustomFieldValueComputer {
+    private static final class InjectedManagementComputer implements CustomFieldValueComputer {
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.BeforeAnalysis;
         }
 
         @Override

@@ -26,16 +26,16 @@ package com.oracle.svm.core.jdk.localization.substitutions;
 
 import org.graalvm.nativeimage.ImageSingletons;
 
-import com.oracle.svm.core.annotate.RecomputeFieldValue;
 import com.oracle.svm.core.jdk.localization.LocalizationSupport;
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 
 import jdk.vm.ci.meta.MetaAccessProvider;
 import jdk.vm.ci.meta.ResolvedJavaField;
 
-final class DefaultLocaleComputer implements RecomputeFieldValue.CustomFieldValueComputer {
+final class DefaultLocaleComputer implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override

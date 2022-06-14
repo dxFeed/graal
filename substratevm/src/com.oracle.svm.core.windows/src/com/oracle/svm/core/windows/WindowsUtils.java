@@ -43,9 +43,9 @@ import org.graalvm.word.WordFactory;
 import com.oracle.svm.core.SubstrateUtil;
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
-import com.oracle.svm.core.annotate.RecomputeFieldValue.CustomFieldValueComputer;
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import com.oracle.svm.core.annotate.TargetClass;
-import com.oracle.svm.core.annotate.Uninterruptible;
+import com.oracle.svm.core.Uninterruptible;
 import com.oracle.svm.core.c.function.CEntryPointActions;
 import com.oracle.svm.core.windows.headers.FileAPI;
 import com.oracle.svm.core.windows.headers.LibLoaderAPI;
@@ -72,8 +72,8 @@ public class WindowsUtils {
         /** Invalidates the standard FileDescriptors, which are allowed in the image heap. */
         static class InvalidHandleValueComputer implements CustomFieldValueComputer {
             @Override
-            public RecomputeFieldValue.ValueAvailability valueAvailability() {
-                return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+            public ValueAvailability valueAvailability() {
+                return ValueAvailability.BeforeAnalysis;
             }
 
             @Override

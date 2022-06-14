@@ -26,6 +26,7 @@ package com.oracle.svm.core.thread;
 
 import java.util.Arrays;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import org.graalvm.nativeimage.Platform;
 import org.graalvm.nativeimage.Platforms;
 
@@ -37,7 +38,7 @@ import com.oracle.svm.core.annotate.InjectAccessors;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
 import com.oracle.svm.core.annotate.TargetClass;
 import com.oracle.svm.core.annotate.TargetElement;
-import com.oracle.svm.core.annotate.Uninterruptible;
+import com.oracle.svm.core.Uninterruptible;
 import com.oracle.svm.core.heap.Heap;
 import com.oracle.svm.core.jdk.NotLoomJDK;
 import com.oracle.svm.core.jdk.UninterruptibleUtils;
@@ -113,10 +114,10 @@ class ThreadGroupIdAccessor {
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ThreadIdRecomputation implements RecomputeFieldValue.CustomFieldValueComputer {
+class ThreadIdRecomputation implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override
@@ -127,10 +128,10 @@ class ThreadIdRecomputation implements RecomputeFieldValue.CustomFieldValueCompu
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ThreadStatusRecomputation implements RecomputeFieldValue.CustomFieldValueComputer {
+class ThreadStatusRecomputation implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override
@@ -151,10 +152,10 @@ class ThreadStatusRecomputation implements RecomputeFieldValue.CustomFieldValueC
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ThreadGroupNUnstartedThreadsRecomputation implements RecomputeFieldValue.CustomFieldValueComputer {
+class ThreadGroupNUnstartedThreadsRecomputation implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override
@@ -172,10 +173,10 @@ class ThreadGroupNUnstartedThreadsRecomputation implements RecomputeFieldValue.C
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ThreadGroupNThreadsRecomputation implements RecomputeFieldValue.CustomFieldValueComputer {
+class ThreadGroupNThreadsRecomputation implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override
@@ -193,10 +194,10 @@ class ThreadGroupNThreadsRecomputation implements RecomputeFieldValue.CustomFiel
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ThreadGroupThreadsRecomputation implements RecomputeFieldValue.CustomFieldValueComputer {
+class ThreadGroupThreadsRecomputation implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override
@@ -214,10 +215,10 @@ class ThreadGroupThreadsRecomputation implements RecomputeFieldValue.CustomField
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ThreadGroupNGroupsRecomputation implements RecomputeFieldValue.CustomFieldValueComputer {
+class ThreadGroupNGroupsRecomputation implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override
@@ -228,10 +229,10 @@ class ThreadGroupNGroupsRecomputation implements RecomputeFieldValue.CustomField
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ThreadGroupGroupsRecomputation implements RecomputeFieldValue.CustomFieldValueComputer {
+class ThreadGroupGroupsRecomputation implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override

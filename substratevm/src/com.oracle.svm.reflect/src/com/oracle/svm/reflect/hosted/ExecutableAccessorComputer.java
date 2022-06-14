@@ -26,6 +26,7 @@ package com.oracle.svm.reflect.hosted;
 
 import java.lang.reflect.Executable;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import org.graalvm.nativeimage.ImageSingletons;
 
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
@@ -39,10 +40,10 @@ import jdk.vm.ci.meta.ResolvedJavaField;
  *
  * @see RecomputeFieldValue
  */
-public final class ExecutableAccessorComputer implements RecomputeFieldValue.CustomFieldValueComputer {
+public final class ExecutableAccessorComputer implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override

@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import com.oracle.graal.pointsto.infrastructure.WrappedJavaType;
-import com.oracle.svm.core.annotate.UnknownObjectField;
+import com.oracle.svm.core.heap.UnknownObjectField;
 import com.oracle.svm.hosted.meta.HostedMetaAccess;
 import com.oracle.svm.hosted.meta.HostedType;
 

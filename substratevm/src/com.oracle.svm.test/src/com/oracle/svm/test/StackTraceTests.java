@@ -27,7 +27,7 @@ package com.oracle.svm.test;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertSame;
 
-import com.oracle.svm.core.annotate.NeverInline;
+import com.oracle.svm.core.NeverInline;
 import com.oracle.svm.core.jdk.StackTraceUtils;
 import com.oracle.svm.core.snippets.KnownIntrinsics;
 import org.junit.Test;

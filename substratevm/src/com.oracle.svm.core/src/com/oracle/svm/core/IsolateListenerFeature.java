@@ -24,10 +24,9 @@
  */
 package com.oracle.svm.core;
 
+import com.oracle.svm.core.annotate.AutomaticFeature;
 import org.graalvm.nativeimage.ImageSingletons;
 import org.graalvm.nativeimage.hosted.Feature;
-
-import com.oracle.svm.core.annotate.AutomaticFeature;
 
 @AutomaticFeature
 public class IsolateListenerFeature implements Feature {

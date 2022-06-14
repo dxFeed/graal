@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 import org.graalvm.compiler.serviceprovider.JavaVersionUtil;
 import org.graalvm.nativeimage.ImageSingletons;
 import org.graalvm.nativeimage.hosted.Feature;
@@ -209,10 +210,10 @@ class VarHandleInfo {
     }
 }
 
-class VarHandleFieldOffsetComputer implements RecomputeFieldValue.CustomFieldValueComputer {
+class VarHandleFieldOffsetComputer implements CustomFieldValueComputer {
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.AfterAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.AfterAnalysis;
     }
 
     @Override

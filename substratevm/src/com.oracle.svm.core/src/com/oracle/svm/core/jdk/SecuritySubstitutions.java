@@ -45,6 +45,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import com.oracle.svm.core.util.CustomFieldValueComputer;
+import com.oracle.svm.core.util.CustomFieldValueTransformer;
 import org.graalvm.compiler.serviceprovider.JavaVersionUtil;
 import org.graalvm.nativeimage.Platform;
 import org.graalvm.nativeimage.Platforms;
@@ -54,7 +56,7 @@ import com.oracle.svm.core.SubstrateUtil;
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.Delete;
 import com.oracle.svm.core.annotate.InjectAccessors;
-import com.oracle.svm.core.annotate.NeverInline;
+import com.oracle.svm.core.NeverInline;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
@@ -240,11 +242,11 @@ final class Target_java_security_Provider {
 }
 
 @Platforms(Platform.HOSTED_ONLY.class)
-class ServiceKeyComputer implements RecomputeFieldValue.CustomFieldValueComputer {
+class ServiceKeyComputer implements CustomFieldValueComputer {
 
     @Override
-    public RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+    public ValueAvailability valueAvailability() {
+        return ValueAvailability.BeforeAnalysis;
     }
 
     @Override
@@ -388,10 +390,10 @@ final class Target_javax_crypto_JceSecurity {
                         "All providers must be registered and verified in the Native Image builder. ");
     }
 
-    private static class VerificationCacheTransformer implements RecomputeFieldValue.CustomFieldValueTransformer {
+    private static class VerificationCacheTransformer implements CustomFieldValueTransformer {
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.BeforeAnalysis;
         }
 
         @Override
@@ -664,10 +666,10 @@ final class Target_sun_security_jca_Providers {
     @RecomputeFieldValue(kind = RecomputeFieldValue.Kind.Custom, declClass = ProviderListTransformer.class, disableCaching = true)//
     private static ProviderList providerList;
 
-    private static class ProviderListTransformer implements RecomputeFieldValue.CustomFieldValueTransformer {
+    private static class ProviderListTransformer implements CustomFieldValueTransformer {
         @Override
-        public RecomputeFieldValue.ValueAvailability valueAvailability() {
-            return RecomputeFieldValue.ValueAvailability.BeforeAnalysis;
+        public ValueAvailability valueAvailability() {
+            return ValueAvailability.BeforeAnalysis;
         }
 
         @Override

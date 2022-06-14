@@ -50,8 +50,8 @@ import org.graalvm.nativeimage.hosted.Feature;
 
 import com.oracle.svm.core.SubstrateOptions;
 import com.oracle.svm.core.annotate.AutomaticFeature;
-import com.oracle.svm.core.annotate.DeoptTest;
-import com.oracle.svm.core.annotate.Hybrid;
+import com.oracle.svm.core.deopt.DeoptTest;
+import com.oracle.svm.core.hub.Hybrid;
 import com.oracle.svm.core.heap.Pod;
 import com.oracle.svm.core.heap.Pod.Builder;
 import com.oracle.svm.core.heap.Pod.RuntimeSupport.PodFactory;

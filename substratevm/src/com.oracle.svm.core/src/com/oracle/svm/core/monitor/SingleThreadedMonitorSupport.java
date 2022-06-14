@@ -24,7 +24,7 @@
  */
 package com.oracle.svm.core.monitor;
 
-import com.oracle.svm.core.annotate.Uninterruptible;
+import com.oracle.svm.core.Uninterruptible;
 
 /**
  * Without support for threads, there is no need for any monitor operations.

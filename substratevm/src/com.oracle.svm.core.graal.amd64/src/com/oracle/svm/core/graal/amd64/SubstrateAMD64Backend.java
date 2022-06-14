@@ -40,6 +40,7 @@ import static org.graalvm.compiler.lir.LIRValueUtil.differentRegisters;
 
 import java.util.Collection;
 
+import com.oracle.svm.core.graal.code.StubCallingConvention;
 import org.graalvm.compiler.asm.Label;
 import org.graalvm.compiler.asm.amd64.AMD64Address;
 import org.graalvm.compiler.asm.amd64.AMD64Assembler;
@@ -523,9 +524,9 @@ public class SubstrateAMD64Backend extends SubstrateBackend implements LIRGenera
      *
      * Only emit vzeroupper if the call uses a
      * {@linkplain SubstrateAMD64LIRGenerator#getDestroysCallerSavedRegisters caller-saved} calling
-     * convention. For {@link com.oracle.svm.core.annotate.StubCallingConvention stub calling
-     * convention} calls, which are {@linkplain SharedMethod#hasCalleeSavedRegisters()
-     * callee-saved}, all handling is done on the callee side.
+     * convention. For {@link StubCallingConvention stub calling convention} calls, which are
+     * {@linkplain SharedMethod#hasCalleeSavedRegisters() callee-saved}, all handling is done on the
+     * callee side.
      *
      * No vzeroupper is emitted for {@linkplain #isRuntimeToRuntimeCall runtime-to-runtime calls},
      * because both, the caller and the callee, have been compiled using the CPU features.

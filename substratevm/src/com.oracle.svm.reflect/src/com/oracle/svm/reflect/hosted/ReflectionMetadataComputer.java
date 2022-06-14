@@ -24,16 +24,16 @@
  */
 package com.oracle.svm.reflect.hosted;
 
-import com.oracle.svm.core.annotate.RecomputeFieldValue;
+import com.oracle.svm.core.util.CustomFieldValueComputer;
 
 import jdk.vm.ci.meta.MetaAccessProvider;
 import jdk.vm.ci.meta.ResolvedJavaField;
 
-public abstract class ReflectionMetadataComputer implements RecomputeFieldValue.CustomFieldValueComputer {
+public abstract class ReflectionMetadataComputer implements CustomFieldValueComputer {
 
     @Override
-    public final RecomputeFieldValue.ValueAvailability valueAvailability() {
-        return RecomputeFieldValue.ValueAvailability.AfterCompilation;
+    public final ValueAvailability valueAvailability() {
+        return ValueAvailability.AfterCompilation;
     }
 
     @Override

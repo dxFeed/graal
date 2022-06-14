@@ -244,6 +244,16 @@ suite = {
       "javaCompliance" : "11+",
       "workingSets" : "API,SDK",
     },
+    "com.oracle.svm.core.annotate" : {
+      "subDir" : "src",
+      "sourceDirs" : ["src"],
+      "dependencies" : [
+         "org.graalvm.nativeimage",
+      ],
+      "checkstyle" : "org.graalvm.word",
+      "javaCompliance" : "11+",
+      "workingSets" : "API,SDK",
+    },
     "org.graalvm.nativeimage.test" : {
       "subDir" : "src",
       "sourceDirs" : ["src"],
@@ -357,6 +367,7 @@ suite = {
       "dependencies" : [
         "org.graalvm.polyglot",
         "org.graalvm.nativeimage",
+        "com.oracle.svm.core.annotate",
         "org.graalvm.collections",
         "org.graalvm.home",
       ],
@@ -369,6 +380,7 @@ suite = {
           "org.graalvm.collections",
           "org.graalvm.home",
           "org.graalvm.home.impl",
+          "com.oracle.svm.core.annotate",
           "org.graalvm.nativeimage.hosted",
           "org.graalvm.nativeimage.c.function",
           "org.graalvm.nativeimage.c.struct",

@@ -33,6 +33,7 @@ import java.util.Arrays;
 import com.oracle.svm.core.SubstrateUtil;
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.Inject;
+import com.oracle.svm.core.util.NewEmptyArrayTransformer;
 import com.oracle.svm.core.annotate.RecomputeFieldValue;
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
@@ -138,7 +139,7 @@ final class Target_java_lang_invoke_BoundMethodHandle_Species_L {
 
 @TargetClass(className = "java.lang.invoke.BoundMethodHandle", innerClass = "SpeciesData")
 final class Target_java_lang_invoke_BoundMethodHandle_SpeciesData {
-    @Alias @RecomputeFieldValue(kind = RecomputeFieldValue.Kind.Custom, declClass = RecomputeFieldValue.NewEmptyArrayTransformer.class) //
+    @Alias @RecomputeFieldValue(kind = RecomputeFieldValue.Kind.Custom, declClass = NewEmptyArrayTransformer.class) //
     private Target_java_lang_invoke_BoundMethodHandle_SpeciesData[] extensions;
 }
 
