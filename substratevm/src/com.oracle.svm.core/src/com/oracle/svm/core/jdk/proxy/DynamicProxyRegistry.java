@@ -26,8 +26,9 @@ package com.oracle.svm.core.jdk.proxy;
 
 import org.graalvm.nativeimage.Platform;
 import org.graalvm.nativeimage.Platforms;
+import org.graalvm.nativeimage.impl.RuntimeProxyCreationSupport;
 
-public interface DynamicProxyRegistry {
+public interface DynamicProxyRegistry extends RuntimeProxyCreationSupport {
 
     @Platforms(Platform.HOSTED_ONLY.class)
     void addProxyClass(Class<?>... interfaces);
