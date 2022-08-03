@@ -65,7 +65,9 @@ Component(s) | License
 
 
 ## How to build
-1. checkout to branch `release/graal-vm/21.1`
+1. git clone https://github.com/graalvm/mx
+3. add `mx` to `PATH`
+2. checkout to branch `release/graal-vm/21.1`
 2. `$ sh buildGraal.sh`
 
 * Artifacts for **iOS**:
