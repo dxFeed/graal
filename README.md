@@ -64,6 +64,18 @@ Component(s) | License
 [Sulong](sulong/LICENSE) | 3-clause BSD
 
 
+## How to build
+1. checkout to branch `release/graal-vm/21.1`
+2. `$ sh buildGraal.sh`
+
+* Artifacts for **iOS**:
+    * `sdk/latest_graalvm_home` -> `JAVA_HOME` to build native-image from java sources
+    * `substratevm/xcode/graal-svm-arm64-ios-d.a`
+    * `substratevm/xcode/graal-svm-arm64-ios-r.a`
+    * `substratevm/xcode/graal-svm-x86-64-ios-simulator-d.a`
+    * `substratevm/xcode/graal-svm-x86-64-ios-simulator-r.a`
+
+
 [badge-dl]: https://img.shields.io/badge/download-latest-blue
 [badge-docs]: https://img.shields.io/badge/docs-read-green
 [badge-gate]: https://github.com/oracle/graal/actions/workflows/main.yml/badge.svg
