@@ -65,10 +65,12 @@ Component(s) | License
 
 
 ## How to build
-1. git clone https://github.com/graalvm/mx
-3. add `mx` to `PATH`
-2. checkout to branch `release/graal-vm/21.1`
-2. `$ sh buildGraal.sh`
+1. Build [Java17 jvmci-22.1-b06](https://github.com/dxFeed/labs-openjdk-17#how-to-build-jvmci-221-b06)
+2. set `JAVA_HOME` to `labs-openjdk-17/build/labsjdk/images/graal-builder-jdk`
+3. git clone https://github.com/graalvm/mx
+4. add `mx` to `PATH`
+5. checkout to branch `release/graal-vm/22.1`
+6. `$ sh buildGraal.sh`
 
 * Artifacts for **iOS**:
     * `sdk/latest_graalvm_home` -> `JAVA_HOME` to build native-image from java sources
