@@ -65,8 +65,8 @@ Component(s) | License
 
 
 ## How to build
-1. Build [Java17 jvmci-22.3-b13](https://github.com/dxFeed/labs-openjdk-17#how-to-build-jvmci-221-b06)
-2. set `JAVA_HOME` to `labs-openjdk-17/build/labsjdk/images/graal-builder-jdk`
+1. Build [Java11 jvmci-22.3-b13](https://github.com/dxFeed/labs-openjdk-11/tree/release/jvmci/22.3-b13#build-instruction-for-mac)
+2. set `JAVA_HOME` to `labs-openjdk-11/java-home`
 3. git clone https://github.com/graalvm/mx
 4. add `mx` to `PATH`
 5. checkout to branch `release/graal-vm/22.3.1`
